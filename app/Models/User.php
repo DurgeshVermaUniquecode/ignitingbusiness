@@ -18,10 +18,14 @@ class User extends Authenticatable
      *
      * @var list<string>
      */
+
+     protected $primaryKey = 'id';
     protected $fillable = [
-        'code',       
+        'code',
         'name',
-        'email',       
+        'father_name',
+        'mother_name',
+        'email',
         'role',
         'image',
         'gender',
@@ -63,6 +67,21 @@ class User extends Authenticatable
     }
 
 
+    public function address()
+    {
+        return $this->hasOne(Address::class);
+    }
+
+    public function bank()
+    {
+        return $this->hasOne(BankDetail::class);
+    }
+
+    public function kyc()
+    {
+        return $this->hasOne(Kyc::class);
+    }
+
     public function children()
     {
         return $this->hasMany(User::class, 'parent_id');
@@ -73,9 +92,6 @@ class User extends Authenticatable
         return $this->belongsTo(User::class, 'parent_id');
     }
 
-    public function poolRequests()
-    {
-        return $this->hasMany(PoolRequest::class, 'user_id', 'id');
-    }
+
 
 }

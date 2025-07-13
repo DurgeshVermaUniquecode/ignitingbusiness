@@ -15,6 +15,13 @@ return [
 
     'name' => env('APP_NAME', 'Laravel'),
 
+    'roles' =>  [
+            'user' => 4,
+            'employee' => 3,
+            'bank-associate' => 5,
+            'sub-admin' => 2,
+    ],
+
     /*
     |--------------------------------------------------------------------------
     | Application Environment

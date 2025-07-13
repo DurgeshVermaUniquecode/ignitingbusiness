@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use DB;
-class UserBankDetail extends Model
+class BankDetail extends Model
 {
     use HasFactory;
     protected $table = 'bank_details';
@@ -13,9 +13,9 @@ class UserBankDetail extends Model
     protected $fillable = [
         'id',
         'user_id',
+        'bank_id',
         'user_name_at_bank',
         'account_number',
-        'name',
         'branch',
         'ifscode',
         'cancele_chq',
@@ -27,5 +27,15 @@ class UserBankDetail extends Model
         'updated_at' => 'datetime',
         'created_at' => 'datetime',
     ];
+
+
+    public function user(){
+        return  $this->belongsTo(User::class);
+    }
+
+     public function bank(){
+        return  $this->belongsTo(Bank::class);
+    }
+
 
 }

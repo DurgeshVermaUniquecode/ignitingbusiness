@@ -31,7 +31,7 @@ class Citie extends Model
      * @var array
      */
     protected $hidden = [
-        
+
     ];
 
     /**
@@ -47,14 +47,15 @@ class Citie extends Model
     public static function GetAllCountryData($cid)
     {
         return Citie::LeftJoin('countries', 'countries.id', '=', 'cities.country_id')->LeftJoin('states', 'states.id', '=', 'cities.state_id')->where('cities.country_id', $cid)->select('cities.*', 'states.name AS state_name', 'countries.name AS country_name')->get();
-    } 
+    }
 
     public static function findByState($sid)
     {
         return Citie::LeftJoin('countries', 'countries.id', '=', 'cities.country_id')->LeftJoin('states', 'states.id', '=', 'cities.state_id')->where('cities.state_id', $sid)->select('cities.*', 'states.name AS state_name', 'countries.name AS country_name')->get();
-    } 
+    }
+    
     public static function findByActiveState($sid)
     {
         return Citie::LeftJoin('countries', 'countries.id', '=', 'cities.country_id')->LeftJoin('states', 'states.id', '=', 'cities.state_id')->where('cities.state_id', $sid)->where('cities.status', 'Active')->select('cities.*', 'states.name AS state_name', 'countries.name AS country_name')->get();
-    } 
+    }
 }
