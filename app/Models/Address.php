@@ -5,10 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class UserAddress extends Model
+class Address extends Model
 {
     use HasFactory;
 
+    protected $table = 'address';
     protected $fillable = [
         'id',
         'user_id',
@@ -16,9 +17,9 @@ class UserAddress extends Model
         'type',
         'address',
         'street',
-        'city',
-        'state',
-        'country',
+        'city_id',
+        'state_id',
+        'country_id',
         'zip',
         'default',
         'default',
@@ -32,66 +33,95 @@ class UserAddress extends Model
         'created_at' => 'datetime',
     ];
 
+    public function user()
+    {
+        return  $this->belongsTo(User::class);
+    }
+
+    public function country()
+    {
+        return $this->belongsTo(Countrie::class);
+    }
+
+
+    public function state()
+    {
+        return $this->belongsTo(State::class);
+    }
+
+    public function city()
+    {
+        return $this->belongsTo(Citie::class);
+    }
+
+
     public static function get()
-    {  
-        return UserAddress::leftJoin('countries', 'user_address.country', '=', 'countries.id')
-        ->leftJoin('states', 'user_address.state', '=', 'states.id')
-        ->leftJoin('cities', 'user_address.city', '=', 'cities.id')
-        ->leftJoin('users', 'user_address.user_id', '=', 'users.id')
-        ->select(   "countries.name as country_name",
-                    "states.name as state_name",
-                    "cities.name as city_name",
-                    "users.name as user_name",
-                    "users.phone_number as user_phone_number",
-                    "users.email as user_email",
-                    "users.reg_code as user_code",
-                    "user_address.*")
-        ->orderBy('id','desc')
-        ->get();
-    } 
+    {
+        return Address::leftJoin('countries', 'user_address.country', '=', 'countries.id')
+            ->leftJoin('states', 'user_address.state', '=', 'states.id')
+            ->leftJoin('cities', 'user_address.city', '=', 'cities.id')
+            ->leftJoin('users', 'user_address.user_id', '=', 'users.id')
+            ->select(
+                "countries.name as country_name",
+                "states.name as state_name",
+                "cities.name as city_name",
+                "users.name as user_name",
+                "users.phone_number as user_phone_number",
+                "users.email as user_email",
+                "users.reg_code as user_code",
+                "user_address.*"
+            )
+            ->orderBy('id', 'desc')
+            ->get();
+    }
 
     public static function findByUserId($id)
-    {  
-        return UserAddress::leftJoin('countries', 'user_address.country', '=', 'countries.id')
-        ->leftJoin('states', 'user_address.state', '=', 'states.id')
-        ->leftJoin('cities', 'user_address.city', '=', 'cities.id')
-        ->select("countries.name as country_name",
-                 "states.name as state_name",
-                 "cities.name as city_name",
-                 "user_address.*")
-        ->where('user_address.user_id', $id)
-        ->where('user_address.status', 'Active')
-        ->first();
-    } 
+    {
+        return Address::leftJoin('countries', 'user_address.country', '=', 'countries.id')
+            ->leftJoin('states', 'user_address.state', '=', 'states.id')
+            ->leftJoin('cities', 'user_address.city', '=', 'cities.id')
+            ->select(
+                "countries.name as country_name",
+                "states.name as state_name",
+                "cities.name as city_name",
+                "user_address.*"
+            )
+            ->where('user_address.user_id', $id)
+            ->where('user_address.status', 'Active')
+            ->first();
+    }
 
     public static function getByUserId($id)
-    {  
-        return UserAddress::leftJoin('countries', 'user_address.country', '=', 'countries.id')
-        ->leftJoin('states', 'user_address.state', '=', 'states.id')
-        ->leftJoin('cities', 'user_address.city', '=', 'cities.id')
-        ->select("countries.name as country_name",
-                 "states.name as state_name",
-                 "cities.name as city_name",
-                 "user_address.*")
-        ->where('user_address.user_id', $id)
-        ->where('user_address.status', 'Active')
-        ->orderBy('id','desc')
-        ->get();
-    } 
+    {
+        return Address::leftJoin('countries', 'user_address.country', '=', 'countries.id')
+            ->leftJoin('states', 'user_address.state', '=', 'states.id')
+            ->leftJoin('cities', 'user_address.city', '=', 'cities.id')
+            ->select(
+                "countries.name as country_name",
+                "states.name as state_name",
+                "cities.name as city_name",
+                "user_address.*"
+            )
+            ->where('user_address.user_id', $id)
+            ->where('user_address.status', 'Active')
+            ->orderBy('id', 'desc')
+            ->get();
+    }
 
     public static function getById($id)
-    {  
-        return UserAddress::leftJoin('countries', 'user_address.country', '=', 'countries.id')
-        ->leftJoin('states', 'user_address.state', '=', 'states.id')
-        ->leftJoin('cities', 'user_address.city', '=', 'cities.id')
-        ->select("countries.name as country_name",
-                 "states.name as state_name",
-                 "cities.name as city_name",
-                 "user_address.*")
-        ->where('user_address.id', $id)
-        ->where('user_address.status', 'Active')
-        ->orderBy('id','desc')
-        ->first();
-    } 
-
+    {
+        return Address::leftJoin('countries', 'user_address.country', '=', 'countries.id')
+            ->leftJoin('states', 'user_address.state', '=', 'states.id')
+            ->leftJoin('cities', 'user_address.city', '=', 'cities.id')
+            ->select(
+                "countries.name as country_name",
+                "states.name as state_name",
+                "cities.name as city_name",
+                "user_address.*"
+            )
+            ->where('user_address.id', $id)
+            ->where('user_address.status', 'Active')
+            ->orderBy('id', 'desc')
+            ->first();
+    }
 }

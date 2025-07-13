@@ -44,19 +44,19 @@ class Bank extends Model
     public function get()
     {
         return Bank::LeftJoin('countries', 'countries.id', '=', 'banks.country_id')->LeftJoin('states', 'states.id', '=', 'banks.state_id')->LeftJoin('cities', 'cities.id', '=', 'banks.headquarter')->select('banks.*','cities.name AS city_name', 'states.name AS state_name', 'countries.name AS country_name')->get();
-    } 
+    }
 
     public function findByCountry($cid)
     {
         return Bank::LeftJoin('countries', 'countries.id', '=', 'banks.country_id')->LeftJoin('states', 'states.id', '=', 'banks.state_id')->LeftJoin('cities', 'cities.id', '=', 'banks.headquarter')->where('banks.country_id', $cid)->select('banks.*', 'cities.name AS city_name','states.name AS state_name', 'countries.name AS country_name')->get();
-    } 
+    }
     public function findByState($sid)
     {
         return Bank::LeftJoin('countries', 'countries.id', '=', 'banks.country_id')->LeftJoin('states', 'states.id', '=', 'banks.state_id')->LeftJoin('cities', 'cities.id', '=', 'banks.headquarter')->where('banks.state_id', $sid)->select('banks.*', 'cities.name AS city_name','states.name AS state_name', 'countries.name AS country_name')->get();
-    } 
+    }
 
     public function findByCity($ciid)
     {
         return Bank::LeftJoin('countries', 'countries.id', '=', 'banks.country_id')->LeftJoin('states', 'states.id', '=', 'banks.state_id')->LeftJoin('cities', 'cities.id', '=', 'banks.headquarter')->where('banks.city_id', $ciid)->select('banks.*', 'cities.name AS city_name','states.name AS state_name', 'countries.name AS country_name')->get();
-    } 
+    }
 }

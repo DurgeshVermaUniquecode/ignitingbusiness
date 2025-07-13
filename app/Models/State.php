@@ -25,7 +25,7 @@ class State extends Model
      * @var array
      */
     protected $hidden = [
-        'id',
+
     ];
 
     /**
@@ -41,7 +41,7 @@ class State extends Model
     public static function getActive()
     {
         return State::Join('countries', 'countries.id', '=', 'states.country_id')->select('states.*', 'countries.name AS country_name')->get();
-    }     
+    }
 
     public static function findByActiveCountry($id)
     {
