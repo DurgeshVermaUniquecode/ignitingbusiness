@@ -1,0 +1,180 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+use App\Models\Packages;
+use Yajra\DataTables\Facades\DataTables;
+
+
+class CoursesContoller extends Controller
+{
+    public function packageList(Request $request)
+    {
+
+
+        if ($request->ajax()) {
+            $query = Packages::query();
+
+            if ($request->has('name') && !empty($request->name)) {
+                $query->where('name', 'like', '%' . $request->name . '%');
+            }
+
+            if ($request->has('status') && !empty($request->status)) {
+                $query->where('status',  $request->status);
+            }
+
+
+            return DataTables::of($query)
+                ->addIndexColumn()
+                ->editColumn('status', function ($row) {
+                    if ($row->status == 'Active') {
+                        return '<span class="badge bg-success">Active</span>';
+                    } elseif ($row->status == 'Inactive') {
+                        return '<span class="badge bg-danger">Inactive</span>';
+                    } else {
+                        return '<span class="badge bg-secondary">' . $row->status . '</span>';
+                    }
+                })
+                ->addColumn('action', function ($row) {
+
+
+
+                    return '<div class="dropdown">
+                            <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
+                              <i class="icon-base ti tabler-dots-vertical"></i>
+                            </button>
+                            <div class="dropdown-menu">
+
+                              <a class="dropdown-item" href="' . route('edit_package', [$row->id]) . '"
+                                ><i class="icon-base ti tabler-pencil me-1"></i> Edit</a
+                              >
+                              <a class="dropdown-item" href="javascript:void(0);" onclick="deletePackage(' . $row->id . ')"
+                                ><i class="icon-base ti tabler-trash me-1"></i> Delete</a
+                              >
+                            </div>
+                          </div>';
+                })
+                ->rawColumns(['action', 'status'])
+                ->make(true);
+        }
+
+        return view('courses.packages.view');
+    }
+
+    public function addPackage(Request $request)
+    {
+
+
+        if ($request->method() == 'POST') {
+
+            $request->validate([
+                'name'         => 'required|string|max:255',
+                'gst'            => 'required|numeric',
+                'amount'            => 'required|numeric',
+                'description'      => 'required|string|max:255',
+                'image'    => 'nullable|mimes:jpg,jpeg,png|max:2048'
+            ], [
+                'name.required'        => 'The name field is required.',
+                'name.string'          => 'The name must be a valid string.',
+                'name.max'             => 'The name may not be greater than 255 characters.',
+
+                'gst.required'         => 'The GST field is required.',
+                'gst.numeric'          => 'The GST must be a valid number.',
+
+                'amount.required'      => 'The amount field is required.',
+                'amount.numeric'       => 'The amount must be a valid number.',
+
+                'description.required' => 'The description field is required.',
+                'description.string'   => 'The description must be a valid string.',
+                'description.max'      => 'The description may not be greater than 255 characters.',
+
+                'image.mimes'          => 'The image must be a file of type: jpg, jpeg, png.',
+                'image.max'            => 'The image must not be larger than 2MB.',
+            ]);
+
+
+
+            $image = null;
+
+            if ($request->hasFile('image')) {
+                $image = $request->file('image');
+                $package_image = time() . '_' . $image->getClientOriginalName();
+                $image->move(public_path('package_images'), $package_image);
+            }
+
+            $data = [
+                'name' => $request->name,
+                'gst' => $request->gst,
+                'amount' => $request->amount,
+                'description' => $request->description,
+                'image' => $image
+            ];
+
+            $insert = Packages::insert($data);
+            return to_route('package_list');
+        }
+
+        return view('courses.packages.add');
+    }
+
+    public function editPackage($id, Request $request)
+    {
+        $package = Packages::find($id);
+        if ($request->method() == 'POST') {
+            $request->validate([
+                'name'         => 'required|string|max:255',
+                'gst'            => 'required|numeric',
+                'amount'            => 'required|numeric',
+                'description'      => 'required|string|max:255',
+                'image'    => 'nullable|mimes:jpg,jpeg,png|max:2048'
+            ], [
+                'name.required'        => 'The name field is required.',
+                'name.string'          => 'The name must be a valid string.',
+                'name.max'             => 'The name may not be greater than 255 characters.',
+
+                'gst.required'         => 'The GST field is required.',
+                'gst.numeric'          => 'The GST must be a valid number.',
+
+                'amount.required'      => 'The amount field is required.',
+                'amount.numeric'       => 'The amount must be a valid number.',
+
+                'description.required' => 'The description field is required.',
+                'description.string'   => 'The description must be a valid string.',
+                'description.max'      => 'The description may not be greater than 255 characters.',
+
+                'image.mimes'          => 'The image must be a file of type: jpg, jpeg, png.',
+                'image.max'            => 'The image must not be larger than 2MB.',
+            ]);
+
+
+
+            $image = null;
+
+            if ($request->hasFile('image')) {
+                $image = $request->file('image');
+                $package_image = time() . '_' . $image->getClientOriginalName();
+                $image->move(public_path('package_images'), $package_image);
+            }
+
+            $data = [
+                'name' => $request->name,
+                'gst' => $request->gst,
+                'amount' => $request->amount,
+                'description' => $request->description,
+                'image' => $image
+            ];
+
+            $update = Packages::where('id',$id)->update($data);
+            return to_route('package_list');
+
+        }
+        return view('courses.packages.edit', compact('package'));
+    }
+
+    public function statusPackage($id) {
+        $package = Packages::find($id);
+        $package->status = $package->status === 'Active' ? 'Inactive' : 'Active';
+        $package->save();
+    }
+}

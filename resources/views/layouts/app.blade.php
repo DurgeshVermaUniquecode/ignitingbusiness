@@ -49,8 +49,12 @@
     <link rel="stylesheet" href="{{ asset('assets/vendor/libs/datatables-buttons-bs5/buttons.bootstrap5.css') }}" />
     <link rel="stylesheet" href="{{ asset('assets/vendor/libs/datatables-rowgroup-bs5/rowgroup.bootstrap5.css') }}" />
     <link rel="stylesheet" href="{{ asset('assets/vendor/fonts/flag-icons.css') }}" />
+    <link rel="stylesheet" href="{{ asset('assets/vendor/libs/select2/select2.css') }}" />
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+        integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
     <!-- Page CSS -->
     <link rel="stylesheet" href="{{ asset('assets/vendor/css/pages/cards-advance.css') }}" />
 
@@ -618,32 +622,52 @@
                             <ul class="menu-inner">
                                 <!-- Dashboards -->
                                 <li class="menu-item ">
-                                    <a href="{{route('dashboard')}}" class="menu-link">
+                                    <a href="{{ route('dashboard') }}" class="menu-link">
                                         <i class="menu-icon icon-base ti tabler-smart-home"></i>
-                                        <div data-i18n="Dashboards">Dashboards</div>
+                                        <div data-i18n="Dashboards">Dashboard</div>
                                     </a>
                                 </li>
 
-                                <li class="menu-item ">
-                                    <a href="{{route('user_list',['user'])}}" class="menu-link">
+                                <li class="menu-item">
+                                    <a href="javascript:void(0)" class="menu-link menu-toggle">
                                         <i class="menu-icon icon-base ti tabler-user"></i>
-                                        <div data-i18n="Layouts">User</div>
+                                        <div data-i18n="Users">Users</div>
                                     </a>
+                                    <ul class="menu-sub">
+                                        <li class="menu-item ">
+                                            <a href="{{ route('user_list', ['user']) }}" class="menu-link">
+                                                <i class="menu-icon icon-base ti tabler-user"></i>
+                                                <div data-i18n="User">User</div>
+                                            </a>
+                                        </li>
+
+                                        <li class="menu-item">
+                                            <a href="{{ route('user_list', ['employee']) }}" class="menu-link">
+                                                <i class="menu-icon icon-base ti tabler-user-check"></i>
+                                                <div data-i18n="Employee">Employee</div>
+                                            </a>
+                                        </li>
+
+                                        <li class="menu-item">
+                                            <a href="{{ route('user_list', ['bank-associate']) }}" class="menu-link">
+                                                <i class="menu-icon icon-base ti tabler-user-shield"></i>
+                                                <div data-i18n="Bank Associate">Bank Associate</div>
+                                            </a>
+                                        </li>
+
+
+                                    </ul>
                                 </li>
 
-                                 <li class="menu-item">
-                                    <a href="{{route('user_list',['employee'])}}" class="menu-link">
-                                        <i class="menu-icon icon-base ti tabler-user-check"></i>
-                                        <div data-i18n="Layouts">Employee</div>
-                                    </a>
-                                </li>
 
-                                 <li class="menu-item">
-                                    <a href="{{route('user_list',['bank-associate'])}}" class="menu-link">
-                                        <i class="menu-icon icon-base ti tabler-user-shield"></i>
-                                        <div data-i18n="Layouts">Bank Associate</div>
-                                    </a>
-                                </li>
+
+
+                                        <li class="menu-item">
+                                            <a href="{{ route('package_list') }}" class="menu-link">
+                                                <i class="menu-icon icon-base ti tabler-package"></i>
+                                                <div data-i18n="Packages">Packages</div>
+                                            </a>
+                                        </li>
 
 
                             </ul>
@@ -714,7 +738,7 @@
 
                     $.each(states, function(index, state) {
 
-                    const isSelected = state.id == selectedStateId ? 'selected' : '';
+                        const isSelected = state.id == selectedStateId ? 'selected' : '';
                         $stateSelect.append(
                             `<option value="${state.id}"  ${isSelected}>${state.name}</option>`);
                     });
@@ -794,10 +818,12 @@
 
     <!-- Main JS -->
 
-    {{-- <script src="{{asset('assets/js/main.js')}}"></script> --}}
+    <script src="{{asset('assets/js/main.js')}}"></script>
 
     <!-- Page JS -->
     <script src="{{ asset('assets/js/dashboards-analytics.js') }}"></script>
+
+    <script src="{{ asset('assets/vendor/libs/select2/select2.js') }}"></script>
 
 </body>
 

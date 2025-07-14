@@ -6,7 +6,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\Controller;
-
+use App\Http\Controllers\CoursesContoller;
 
 Auth::routes();
 
@@ -46,6 +46,13 @@ Route::middleware(['roleAuth:Admin'])->group(function () {
         Route::match(['get','post'],'add/{type}',[UserController::class,'addUsers'])->name('add_user');
         Route::match(['get','post'],'edit/{type}/{id}',[UserController::class,'editUser'])->name('edit_user');
         Route::match(['get','post'],'status/{id}',[UserController::class,'statusUser'])->name('status_user');
+    });
+
+    Route::prefix('packages')->group(function(){
+        Route::match(['get','post'],'list',[CoursesContoller::class,'packageList'])->name('package_list');
+         Route::match(['get','post'],'add',[CoursesContoller::class,'addPackage'])->name('add_package');
+        Route::match(['get','post'],'edit/{id}',[CoursesContoller::class,'editPackage'])->name('edit_package');
+        Route::match(['get','post'],'status/{id}',[CoursesContoller::class,'statusPackage'])->name('status_package');
     });
 
 });
