@@ -4,9 +4,9 @@
     <div class="container-xxl flex-grow-1 container-p-y">
 
         <div class="d-flex justify-content-between">
-            <h4 class="mb-4">Packages List</h4>
+            <h4 class="mb-4">Categories List</h4>
 
-            <a href="{{ route('add_package') }}" class="btn btn-primary btn-md"><i class="fa-solid fa-circle-plus"></i>
+            <a href="{{ route('add_business_category') }}" class="btn btn-primary btn-md"><i class="fa-solid fa-circle-plus"></i>
                 &nbsp; Add </a>
         </div>
 
@@ -39,17 +39,17 @@
                             </div>
 
                             <div class="col-sm-3">
-                                <div class="mb-6">
-                                    <label for="status" class="form-label">Status</label>
-                                    <select class="form-select" id="status" name="status" aria-label="Select Status"
-                                        required>
-                                        <option value="">Select Status</option>
-                                        <option value="Active">Active</option>
-                                        <option value="Inactive">Inactive</option>
-                                    </select>
-                                </div>
+                                    <div class="mb-6">
+                                        <label for="status" class="form-label">Status</label>
+                                        <select class="form-select" id="status" name="status"
+                                            aria-label="Select Status" required>
+                                            <option value="" >Select Status</option>
+                                            <option value="Active" >Active</option>
+                                            <option value="Inactive">Inactive</option>
+                                        </select>
+                                    </div>
 
-                            </div>
+                                </div>
 
 
 
@@ -64,13 +64,12 @@
 
 
         <div class="card p-4">
-            <table class="table table-borderless" id="packages-table">
+            <table class="table table-borderless" id="category-table">
                 <thead>
                     <tr>
                         <th>S.No</th>
+                        <th>Package Name</th>
                         <th>Name</th>
-                        <th>GST (%)</th>
-                        <th>Amount (&#8377;)</th>
                         <th>Image</th>
                         <th>Description</th>
                         <th>Status</th>
@@ -81,7 +80,7 @@
         </div>
 
 
-        <!-- Bootstrap Modal -->
+           <!-- Bootstrap Modal -->
         <div class="modal fade" id="dynamicModal" tabindex="-1" aria-labelledby="dynamicModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
@@ -97,13 +96,12 @@
         </div>
 
 
-
     </div>
     <!--/ Content -->
 
     <script>
         $(document).ready(function() {
-            let table = $('#packages-table').DataTable({
+            let table = $('#category-table').DataTable({
                 processing: true,
                 serverSide: true,
                 dom: '<"row mb-3"<"col-md-6"B><"col-md-6 text-end"f>>' +
@@ -117,7 +115,7 @@
                 ],
                 pageLength: 10, // default selected length
                 ajax: {
-                    url: '{{ route('package_list') }}',
+                    url: '{{ route('business_categories_list') }}',
                     data: function(d) {
                         d.name = $('#search-name').val();
                         d.status = $('#status').val();
@@ -130,24 +128,20 @@
                         searchable: false
                     },
                     {
+                        data: 'package_name',
+                        name: 'package_name'
+                    },
+                    {
                         data: 'name',
                         name: 'name'
-                    },
-                    {
-                        data: 'gst',
-                        name: 'gst'
-                    },
-                    {
-                        data: 'amount',
-                        name: 'amount'
                     },
                     {
                         data: 'image',
                         name: 'image'
                     },
                     {
-                        data: 'desription',
-                        name: 'desription'
+                        data: 'description',
+                        name: 'description'
                     },
                     {
                         data: 'status',
@@ -168,7 +162,7 @@
         });
 
 
-        function deletePackage(packageId) {
+        function deleteCategory(categoryId) {
             Swal.fire({
                 title: 'Are you sure to change status?',
                 icon: 'warning',
@@ -179,18 +173,18 @@
                 cancelButtonColor: '#3085d6'
             }).then((result) => {
                 if (result.isConfirmed) {
-                    let url = "{{ route('status_package', ':id') }}".replace(':id', packageId);
+                    let url = "{{ route('status_business_category', ':id') }}".replace(':id', categoryId);
 
                     $.ajax({
                         url: url,
                         method: 'GET',
                         success: function(response) {
-                            Swal.fire('Deleted!', 'Package status changed.', 'success').then(() => {
+                            Swal.fire('Deleted!', 'Category status changed.', 'success').then(() => {
                                 location.reload(); // or remove row from table dynamically
                             });
                         },
                         error: function(xhr) {
-                            Swal.fire('Error', 'Failed to delete package.', 'error');
+                            Swal.fire('Error', 'Failed to delete Category.', 'error');
                             console.error(xhr.responseText);
                         }
                     });
@@ -203,7 +197,7 @@
             var content = '';
 
             if (type === 'image') {
-                content = `<img src="{{asset('package_images')}}/${value}" alt="Image" class="img-fluid">`;
+                content = `<img src="{{asset('categories_images')}}/${value}" alt="Image" class="img-fluid">`;
             } else if (type === 'description') {
                 content = `<p>${value}</p>`;
             } else {
@@ -213,6 +207,7 @@
             $('#dynamicModalBody').html(content);
             $('#dynamicModal').modal('show');
         }
+
     </script>
 
     {{--

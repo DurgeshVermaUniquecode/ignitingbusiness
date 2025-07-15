@@ -660,6 +660,12 @@
                                 </li>
 
 
+                                <li class="menu-item">
+                                    <a href="javascript:void(0)" class="menu-link menu-toggle">
+                                        <i class="menu-icon icon-base ti tabler-book"></i>
+                                        <div data-i18n="Courses">Courses</div>
+                                    </a>
+                                    <ul class="menu-sub">
 
 
                                         <li class="menu-item">
@@ -668,6 +674,21 @@
                                                 <div data-i18n="Packages">Packages</div>
                                             </a>
                                         </li>
+
+                                        <li class="menu-item">
+                                            <a href="{{ route('business_categories_list') }}" class="menu-link">
+                                                <i class="menu-icon icon-base ti tabler-category"></i>
+                                                <div data-i18n="Categories">Categories</div>
+                                            </a>
+                                        </li>
+
+                                    </ul>
+                                </li>
+
+
+
+
+
 
 
                             </ul>
@@ -818,7 +839,7 @@
 
     <!-- Main JS -->
 
-    <script src="{{asset('assets/js/main.js')}}"></script>
+    <script src="{{ asset('assets/js/main.js') }}"></script>
 
     <!-- Page JS -->
     <script src="{{ asset('assets/js/dashboards-analytics.js') }}"></script>

@@ -55,4 +55,13 @@ Route::middleware(['roleAuth:Admin'])->group(function () {
         Route::match(['get','post'],'status/{id}',[CoursesContoller::class,'statusPackage'])->name('status_package');
     });
 
+    Route::prefix('business-categories')->group(function(){
+        Route::match(['get','post'],'list',[CoursesContoller::class,'businessCategoriesList'])->name('business_categories_list');
+         Route::match(['get','post'],'add',[CoursesContoller::class,'addBusinessCategory'])->name('add_business_category');
+        Route::match(['get','post'],'edit/{id}',[CoursesContoller::class,'editBusinessCategory'])->name('edit_business_category');
+        Route::match(['get','post'],'status/{id}',[CoursesContoller::class,'statusBusinessCategory'])->name('status_business_category');
+    });
+
+
+
 });

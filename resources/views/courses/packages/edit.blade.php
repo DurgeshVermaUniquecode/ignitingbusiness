@@ -11,7 +11,7 @@
                         <h5 class="mb-0">Update Package</h5>
                     </div>
                     <div class="card-body">
-                        <form action="" method="POST" enctype="multipart/form-data">
+                        <form action="{{route('edit_package',[$package->id])}}" method="POST" enctype="multipart/form-data">
 
                             @csrf
                             <div class="row">
