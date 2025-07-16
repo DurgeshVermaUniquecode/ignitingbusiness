@@ -3,12 +3,7 @@
     <!-- Content -->
     <div class="container-xxl flex-grow-1 container-p-y">
 
-        <div class="d-flex justify-content-between">
-            <h4 class="mb-4">Packages List</h4>
 
-            <a href="{{ route('add_package') }}" class="btn btn-primary btn-md"><i class="fa-solid fa-circle-plus"></i>
-                &nbsp; Add </a>
-        </div>
 
         <!-- DataTable with Buttons -->
 
@@ -61,24 +56,34 @@
 
         </div>
 
+        <div class="card">
+            <div class="card-header border-bottom d-flex justify-content-between">
+                <h5 class="card-title mb-0">Packages List</h5>
 
+                <a href="{{ route('add_package') }}" class="btn add-new btn-primary"><span><span
+                            class="d-flex align-items-center gap-2"><i class="icon-base ti tabler-plus icon-xs"></i> <span
+                                class="d-none d-sm-inline-block">Add Package</span></span></span></a>
+            </div>
 
-        <div class="card p-4">
-            <table class="table table-borderless" id="packages-table">
-                <thead>
-                    <tr>
-                        <th>S.No</th>
-                        <th>Name</th>
-                        <th>GST (%)</th>
-                        <th>Amount (&#8377;)</th>
-                        <th>Image</th>
-                        <th>Description</th>
-                        <th>Status</th>
-                        <th>Action</th>
-                    </tr>
-                </thead>
-            </table>
+            <div class="card-datatable">
+                <table class="table" id="data-table">
+                    <thead class="border-top">
+                        <tr>
+                            <th>S.No</th>
+                            <th>Name</th>
+                            <th>GST (%)</th>
+                            <th>Amount (&#8377;)</th>
+                            <th>Image</th>
+                            <th>Description</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+
         </div>
+
 
 
         <!-- Bootstrap Modal -->
@@ -102,28 +107,25 @@
     <!--/ Content -->
 
     <script>
-        $(document).ready(function() {
-            let table = $('#packages-table').DataTable({
-                processing: true,
-                serverSide: true,
-                dom: '<"row mb-3"<"col-md-6"B><"col-md-6 text-end"f>>' +
-                    '<"row mb-2"<"col-md-6"l><"col-md-6 text-end"p>>' +
-                    'rt' +
-                    '<"row mt-2"<"col-md-6"i><"col-md-6 text-end"p>>',
 
-                lengthMenu: [
-                    [10, 25, 50, 100, -1],
-                    [10, 25, 50, 100, "All"]
-                ],
-                pageLength: 10, // default selected length
-                ajax: {
+        $(document).ready(function() {
+
+            const datatable = document.querySelector('#data-table');
+            let table;
+
+            if (datatable) {
+
+                table = new DataTable(datatable, {
+                    processing: true,
+                    serverSide: true,
+                    ajax: {
                     url: '{{ route('package_list') }}',
                     data: function(d) {
                         d.name = $('#search-name').val();
                         d.status = $('#status').val();
                     }
                 },
-                columns: [{
+                   columns: [{
                         data: 'DT_RowIndex',
                         name: 'DT_RowIndex',
                         orderable: false,
@@ -159,12 +161,106 @@
                         orderable: false,
                         searchable: false
                     },
-                ]
-            });
+                ],
+                    layout: {
+                        topStart: {
+                            rowClass: 'row m-3 my-0 justify-content-between',
+                            features: [{
+                                pageLength: {
+                                    menu: [10, 25, 50, 100],
+                                    text: '_MENU_'
+                                }
+                            }]
+                        },
+                        topEnd: {
+                            features: [{
+                                    search: {
+                                        placeholder: 'Search here',
+                                        text: '_INPUT_'
+                                    }
+                                },
+                                {
+                                    buttons: [{
+                                        extend: 'collection',
+                                        className: 'btn btn-label-secondary dropdown-toggle',
+                                        text: '<span class="d-flex align-items-center gap-2"><i class="icon-base ti tabler-upload icon-xs"></i> <span class="d-none d-sm-inline-block">Export</span></span>',
+                                        buttons: [{
+                                                extend: 'print',
+                                                text: `<span class="d-flex align-items-center"><i class="icon-base ti tabler-printer me-1"></i>Print</span>`,
+                                                className: 'dropdown-item',
+                                                exportOptions: {
+                                                    columns: [0, 1, 2, 3, 4],
 
-            $('#search-name, #status').on('change keyup', function() {
+                                                },
+
+                                            },
+                                            {
+                                                extend: 'csv',
+                                                text: `<span class="d-flex align-items-center"><i class="icon-base ti tabler-file-text me-1"></i>Csv</span>`,
+                                                className: 'dropdown-item',
+                                                exportOptions: {
+                                                    columns: [0, 1, 2, 3, 4],
+
+                                                }
+                                            },
+                                            {
+                                                extend: 'excel',
+                                                text: `<span class="d-flex align-items-center"><i class="icon-base ti tabler-file-spreadsheet me-1"></i>Excel</span>`,
+                                                className: 'dropdown-item',
+                                                exportOptions: {
+                                                    columns: [0, 1, 2, 3, 4],
+
+                                                }
+                                            },
+                                            {
+                                                extend: 'pdf',
+                                                text: `<span class="d-flex align-items-center"><i class="icon-base ti tabler-file-description me-1"></i>Pdf</span>`,
+                                                className: 'dropdown-item',
+                                                exportOptions: {
+                                                    columns: [0, 1, 2, 3, 4],
+
+                                                }
+                                            },
+                                            {
+                                                extend: 'copy',
+                                                text: `<i class="icon-base ti tabler-copy me-1"></i>Copy`,
+                                                className: 'dropdown-item',
+                                                exportOptions: {
+                                                    columns: [0, 1, 2, 3, 4],
+
+                                                }
+                                            }
+                                        ]
+                                    }, ]
+                                }
+                            ]
+                        },
+                        bottomStart: {
+                            rowClass: 'row mx-3 justify-content-between',
+                            features: ['info']
+                        },
+                        bottomEnd: 'paging'
+                    },
+                    language: {
+                        paginate: {
+                            next: '<i class="icon-base ti tabler-chevron-right scaleX-n1-rtl icon-18px"></i>',
+                            previous: '<i class="icon-base ti tabler-chevron-left scaleX-n1-rtl icon-18px"></i>',
+                            first: '<i class="icon-base ti tabler-chevrons-left scaleX-n1-rtl icon-18px"></i>',
+                            last: '<i class="icon-base ti tabler-chevrons-right scaleX-n1-rtl icon-18px"></i>'
+                        }
+                    },
+
+                });
+
+
+                $('#search-name, #status').on('change keyup', function() {
                 table.draw();
             });
+
+
+
+            }
+
         });
 
 
@@ -203,7 +299,7 @@
             var content = '';
 
             if (type === 'image') {
-                content = `<img src="{{asset('package_images')}}/${value}" alt="Image" class="img-fluid">`;
+                content = `<img src="{{ asset('package_images') }}/${value}" alt="Image" class="img-fluid">`;
             } else if (type === 'description') {
                 content = `<p>${value}</p>`;
             } else {
@@ -215,10 +311,4 @@
         }
     </script>
 
-    {{--
- dom: '<"row mb-3"<"col-md-6"B><"col-md-6 text-end"f>>' +
-         '<"row mb-2"<"col-md-6"l><"col-md-6 text-end"p>>' +
-         'rt' +
-         '<"row mt-2"<"col-md-6"i><"col-md-6 text-end"p>>',
-            // buttons: ['copy', 'csv', 'excel', 'pdf', 'print'], --}}
 @endsection

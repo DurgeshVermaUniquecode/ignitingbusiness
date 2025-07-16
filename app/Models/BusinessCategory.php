@@ -13,4 +13,9 @@ class BusinessCategory extends Model
     public function package(){
         return $this->belongsTo(Packages::class);
     }
+
+      public function courses(){
+        return $this->belongsTo(Courses::class);
+    }
+
 }

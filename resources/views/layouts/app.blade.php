@@ -67,10 +67,10 @@
     <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
     <script src="//cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
 
-    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.4.1/css/buttons.dataTables.min.css">
+    {{-- <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.4.1/css/buttons.dataTables.min.css">
     <script src="https://cdn.datatables.net/buttons/2.4.1/js/dataTables.buttons.min.js"></script>
     <script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.html5.min.js"></script>
-    <script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.print.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.print.min.js"></script> --}}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
@@ -682,12 +682,100 @@
                                             </a>
                                         </li>
 
+                                        <li class="menu-item">
+                                            <a href="{{ route('course_list') }}" class="menu-link">
+                                                <i class="menu-icon icon-base ti tabler-category"></i>
+                                                <div data-i18n="Courses">Courses</div>
+                                            </a>
+                                        </li>
+
                                     </ul>
                                 </li>
 
 
+                                  <li class="menu-item ">
+                                            <a href="#" class="menu-link">
+                                                <i class="menu-icon icon-base ti tabler-a-b-2"></i>
+                                                <div data-i18n="Leads">Leads</div>
+                                            </a>
+                                        </li>
+
+                                          <li class="menu-item ">
+                                            <a href="#" class="menu-link">
+                                                <i class="menu-icon icon-base ti tabler-article"></i>
+                                                <div data-i18n="Blogs">Blogs</div>
+                                            </a>
+                                        </li>
+
+                                         <li class="menu-item ">
+                                            <a href="#" class="menu-link">
+                                                <i class="menu-icon icon-base ti tabler-device-mobile-message"></i>
+                                                <div data-i18n="Support">Support</div>
+                                            </a>
+                                        </li>
 
 
+                                         <li class="menu-item ">
+                                            <a href="#" class="menu-link">
+                                                <i class="menu-icon icon-base ti tabler-files"></i>
+                                                <div data-i18n="Documents">Documents</div>
+                                            </a>
+                                        </li>
+
+                                        <li class="menu-item ">
+                                            <a href="#" class="menu-link">
+                                                <i class="menu-icon icon-base ti tabler-currency-rupee"></i>
+                                                <div data-i18n="Commision">Commision</div>
+                                            </a>
+                                        </li>
+
+
+                                           <li class="menu-item">
+                                    <a href="javascript:void(0)" class="menu-link menu-toggle">
+                                        <i class="menu-icon icon-base ti tabler-settings"></i>
+                                        <div data-i18n="Settings">Settings</div>
+                                    </a>
+                                    <ul class="menu-sub">
+
+
+                                        <li class="menu-item">
+                                            <a href="#" class="menu-link">
+                                                <div data-i18n="Front Images ">Front Images </div>
+                                            </a>
+                                        </li>
+
+                                        <li class="menu-item">
+                                            <a href="#" class="menu-link">
+                                                <div data-i18n="About Us">About Us</div>
+                                            </a>
+                                        </li>
+
+                                        <li class="menu-item">
+                                            <a href="#" class="menu-link">
+                                                <div data-i18n="Contact Details">Contact Details</div>
+                                            </a>
+                                        </li>
+
+                                         <li class="menu-item">
+                                            <a href="#" class="menu-link">
+                                                <div data-i18n="Terms & Conditions">Terms & Conditions</div>
+                                            </a>
+                                        </li>
+
+                                         <li class="menu-item">
+                                            <a href="#" class="menu-link">
+                                                <div data-i18n="Privacy Policy ">Privacy Policy </div>
+                                            </a>
+                                        </li>
+
+                                         <li class="menu-item">
+                                            <a href="#" class="menu-link">
+                                                <div data-i18n="Refund Policy ">Refund Policy </div>
+                                            </a>
+                                        </li>
+
+                                    </ul>
+                                </li>
 
 
 
@@ -829,7 +917,7 @@
     <!-- Vendors JS -->
     <script src="{{ asset('assets/vendor/libs/apex-charts/apexcharts.js') }}"></script>
     <script src="{{ asset('assets/vendor/libs/swiper/swiper.js') }}"></script>
-    {{-- <script src="{{asset('assets/vendor/libs/datatables-bs5/datatables-bootstrap5.js')}}"></script> --}}
+    <script src="{{asset('assets/vendor/libs/datatables-bs5/datatables-bootstrap5.js')}}"></script>
 
 
     <!-- Form Validation -->

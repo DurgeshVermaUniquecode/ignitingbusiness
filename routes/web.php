@@ -63,5 +63,14 @@ Route::middleware(['roleAuth:Admin'])->group(function () {
     });
 
 
+    Route::prefix('courses')->group(function(){
+        Route::match(['get','post'],'list',[CoursesContoller::class,'coursesList'])->name('course_list');
+         Route::match(['get','post'],'add',[CoursesContoller::class,'addCourses'])->name('add_course');
+        Route::match(['get','post'],'edit/{id}',[CoursesContoller::class,'editCourses'])->name('edit_course');
+        Route::match(['get','post'],'status/{id}',[CoursesContoller::class,'statusCourses'])->name('status_course');
+    });
+
+
+
 
 });
