@@ -1,4 +1,7 @@
 @extends('layouts.app')
+
+@section('title', 'User List')
+
 @section('content')
     <!-- Content -->
     <div class="container-xxl flex-grow-1 container-p-y">
@@ -61,9 +64,12 @@
                     <thead class="border-top">
                         <tr>
                             <th>S.No</th>
+                            <th>Code</th>
                             <th>Name</th>
                             <th>Email</th>
                             <th>Mobile</th>
+                            <th>Gender</th>
+                            <th>DOB</th>
                             <th>Status</th>
                             <th>Action</th>
                         </tr>
@@ -76,9 +82,8 @@
 
     </div>
     <!--/ Content -->
-
-
-
+@endsection
+@push('scripts')
     <script>
         $(document).ready(function() {
 
@@ -103,6 +108,10 @@
                             orderable: false,
                             searchable: false
                         },
+                         {
+                            data: 'code',
+                            name: 'code'
+                        },
                         {
                             data: 'name',
                             name: 'name'
@@ -114,6 +123,14 @@
                         {
                             data: 'phone_number',
                             name: 'phone_number'
+                        },
+                        {
+                            data: 'gender',
+                            name: 'gender'
+                        },
+                        {
+                            data: 'dob',
+                            name: 'dob'
                         },
                         {
                             data: 'status',
@@ -259,5 +276,4 @@
             });
         }
     </script>
-
-@endsection
+@endpush
