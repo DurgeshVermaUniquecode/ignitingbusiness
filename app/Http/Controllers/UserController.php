@@ -231,6 +231,7 @@ class UserController extends Controller
                     'parent_id' => 0,
                     'referral_id' => 0,
                     'phone_number' => $request->phone,
+                    'gender' => $request->gender,
                     'password' => Hash::make($request->password),
                     'image' => $profile_image,
                     'dob' => $request->dob
@@ -399,6 +400,7 @@ class UserController extends Controller
                 $user->mother_name = $request->mother_name;
                 $user->password = Hash::make($request->password);
                 $user->image = $profile_image;
+                $user->gender = $request->gender;
                 $user->dob = $request->dob;
                 $user->update();
 
