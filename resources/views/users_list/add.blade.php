@@ -171,7 +171,7 @@
                                     <div class="mb-6">
                                         <label for="country" class="form-label">Country<span
                                                 class="text-danger">*</span></label>
-                                        <select class="form-select" id="country" name="country"
+                                        <select class="form-select select2" id="country" name="country"
                                             onchange="getStates(this.value)" aria-label="Select Country" required>
                                             <option value="" selected>Select Country</option>
                                             @foreach ($countries as $country)

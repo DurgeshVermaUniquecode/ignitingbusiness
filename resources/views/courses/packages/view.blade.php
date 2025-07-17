@@ -5,12 +5,14 @@
 
 
 
+        <!-- DataTable with Buttons -->
+
 
         <div class="accordion mt-4 mb-4" id="accordionFilter">
             <div class="accordion-item active">
                 <h2 class="accordion-header" id="headingOne">
-                    <button type="button" class="accordion-button" data-bs-toggle="collapse" data-bs-target="#filterAccordian"
-                        aria-expanded="false" aria-controls="filterAccordian">
+                    <button type="button" class="accordion-button" data-bs-toggle="collapse"
+                        data-bs-target="#filterAccordian" aria-expanded="false" aria-controls="filterAccordian">
                         <i class="fa-solid fa-filter"></i> &nbsp;Filter
                     </button>
                 </h2>
@@ -30,30 +32,37 @@
                                     </div>
                                 </div>
                             </div>
+
                             <div class="col-sm-3">
                                 <div class="mb-6">
-                                    <label class="form-label" for="basic-icon-default-email">Email</label>
-                                    <div class="input-group input-group-merge">
-                                        <span class="input-group-text"><i class="icon-base ti tabler-mail"></i></span>
-                                        <input type="text" id="search-email" class="form-control"
-                                            placeholder="Search By Email" aria-label="john.doe"
-                                            aria-describedby="basic-icon-default-email2" />
-                                    </div>
+                                    <label for="status" class="form-label">Status</label>
+                                    <select class="form-select" id="status" name="status" aria-label="Select Status"
+                                        required>
+                                        <option value="">Select Status</option>
+                                        <option value="Active">Active</option>
+                                        <option value="Inactive">Inactive</option>
+                                    </select>
                                 </div>
+
                             </div>
+
+
+
                         </div>
                     </div>
                 </div>
             </div>
+
+
         </div>
 
         <div class="card">
             <div class="card-header border-bottom d-flex justify-content-between">
-                <h5 class="card-title mb-0">User List ({{ ucfirst($type) }})</h5>
+                <h5 class="card-title mb-0">Packages List</h5>
 
-                <a href="{{ route('add_user', $type) }}" class="btn add-new btn-primary"><span><span
+                <a href="{{ route('add_package') }}" class="btn add-new btn-primary"><span><span
                             class="d-flex align-items-center gap-2"><i class="icon-base ti tabler-plus icon-xs"></i> <span
-                                class="d-none d-sm-inline-block">Add {{ ucfirst($type) }}</span></span></span></a>
+                                class="d-none d-sm-inline-block">Add Package</span></span></span></a>
             </div>
 
             <div class="card-datatable">
@@ -62,8 +71,10 @@
                         <tr>
                             <th>S.No</th>
                             <th>Name</th>
-                            <th>Email</th>
-                            <th>Mobile</th>
+                            <th>GST (%)</th>
+                            <th>Amount (&#8377;)</th>
+                            <th>Image</th>
+                            <th>Description</th>
                             <th>Status</th>
                             <th>Action</th>
                         </tr>
@@ -74,12 +85,29 @@
         </div>
 
 
+
+        <!-- Bootstrap Modal -->
+        <div class="modal fade" id="dynamicModal" tabindex="-1" aria-labelledby="dynamicModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="dynamicModalLabel">Preview</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body" id="dynamicModalBody">
+                        <!-- Content will be inserted here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
     </div>
     <!--/ Content -->
 
-
-
     <script>
+
         $(document).ready(function() {
 
             const datatable = document.querySelector('#data-table');
@@ -91,43 +119,49 @@
                     processing: true,
                     serverSide: true,
                     ajax: {
-                        url: '{{ route('user_list', $type) }}',
-                        data: function(d) {
-                            d.name = $('#search-name').val();
-                            d.email = $('#search-email').val();
-                        }
+                    url: '{{ route('package_list') }}',
+                    data: function(d) {
+                        d.name = $('#search-name').val();
+                        d.status = $('#status').val();
+                    }
+                },
+                   columns: [{
+                        data: 'DT_RowIndex',
+                        name: 'DT_RowIndex',
+                        orderable: false,
+                        searchable: false
                     },
-                    columns: [{
-                            data: 'DT_RowIndex',
-                            name: 'DT_RowIndex',
-                            orderable: false,
-                            searchable: false
-                        },
-                        {
-                            data: 'name',
-                            name: 'name'
-                        },
-                        {
-                            data: 'email',
-                            name: 'email'
-                        },
-                        {
-                            data: 'phone_number',
-                            name: 'phone_number'
-                        },
-                        {
-                            data: 'status',
-                            name: 'status'
-                        },
-                        {
-                            data: 'action',
-                            name: 'action',
-                            orderable: false,
-                            searchable: false
-                        },
-                    ],
-
-
+                    {
+                        data: 'name',
+                        name: 'name'
+                    },
+                    {
+                        data: 'gst',
+                        name: 'gst'
+                    },
+                    {
+                        data: 'amount',
+                        name: 'amount'
+                    },
+                    {
+                        data: 'image',
+                        name: 'image'
+                    },
+                    {
+                        data: 'desription',
+                        name: 'desription'
+                    },
+                    {
+                        data: 'status',
+                        name: 'status'
+                    },
+                    {
+                        data: 'action',
+                        name: 'action',
+                        orderable: false,
+                        searchable: false
+                    },
+                ],
                     layout: {
                         topStart: {
                             rowClass: 'row m-3 my-0 justify-content-between',
@@ -219,9 +253,10 @@
                 });
 
 
-                $('#search-name, #search-email').on('keyup', function() {
-                    table.draw();
-                });
+                $('#search-name, #status').on('change keyup', function() {
+                table.draw();
+            });
+
 
 
             }
@@ -229,7 +264,7 @@
         });
 
 
-        function deleteUser(userId) {
+        function deletePackage(packageId) {
             Swal.fire({
                 title: 'Are you sure to change status?',
                 icon: 'warning',
@@ -240,23 +275,39 @@
                 cancelButtonColor: '#3085d6'
             }).then((result) => {
                 if (result.isConfirmed) {
-                    let url = "{{ route('status_user', ':id') }}".replace(':id', userId);
+                    let url = "{{ route('status_package', ':id') }}".replace(':id', packageId);
 
                     $.ajax({
                         url: url,
                         method: 'GET',
                         success: function(response) {
-                            Swal.fire('Deleted!', 'User status changed.', 'success').then(() => {
+                            Swal.fire('Deleted!', 'Package status changed.', 'success').then(() => {
                                 location.reload(); // or remove row from table dynamically
                             });
                         },
                         error: function(xhr) {
-                            Swal.fire('Error', 'Failed to delete user.', 'error');
+                            Swal.fire('Error', 'Failed to delete package.', 'error');
                             console.error(xhr.responseText);
                         }
                     });
                 }
             });
+        }
+
+
+        function openModal(type, value) {
+            var content = '';
+
+            if (type === 'image') {
+                content = `<img src="{{ asset('package_images') }}/${value}" alt="Image" class="img-fluid">`;
+            } else if (type === 'description') {
+                content = `<p>${value}</p>`;
+            } else {
+                return;
+            }
+
+            $('#dynamicModalBody').html(content);
+            $('#dynamicModal').modal('show');
         }
     </script>
 
