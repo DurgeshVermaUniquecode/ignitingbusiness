@@ -74,7 +74,7 @@
             <nav class="layout-navbar navbar navbar-expand-xl align-items-center" id="layout-navbar">
                 <div class="container-xxl">
                     <div class="navbar-brand app-brand demo d-none d-xl-flex py-0 me-4 ms-0">
-                        <a href="index.html" class="app-brand-link">
+                        <a href="javascript:void(0)" class="app-brand-link">
                             <span class="app-brand-logo demo">
                                 <span class="text-primary">
                                     <img src="{{ asset('images/' . config('app.logo')) }}" width="50">
@@ -84,7 +84,7 @@
                                 class="app-brand-text demo menu-text fw-bold text-heading">{{ config('app.name') }}</span>
                         </a>
 
-                        <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto d-xl-none">
+                        <a href="javascript:void(0)" class="layout-menu-toggle menu-link text-large ms-auto d-xl-none">
                             <i
                                 class="icon-base ti tabler-x icon-sm d-flex align-items-center justify-content-center"></i>
                         </a>
@@ -100,7 +100,7 @@
                         <ul class="navbar-nav flex-row align-items-center ms-md-auto">
                             <!-- Search -->
                             <li class="nav-item navbar-search-wrapper btn btn-text-secondary btn-icon rounded-pill">
-                                <a class="nav-item nav-link search-toggler px-0" href="javascript:void(0);">
+                                <a class="nav-item nav-link search-toggler px-0" href="javascript:void(0)">
                                     <span class="d-inline-block text-body-secondary fw-normal" id="autocomplete"></span>
                                 </a>
                             </li>
@@ -109,7 +109,7 @@
                             <!-- Style Switcher -->
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle hide-arrow btn btn-icon btn-text-secondary rounded-pill"
-                                    id="nav-theme" href="javascript:void(0);" data-bs-toggle="dropdown">
+                                    id="nav-theme" href="javascript:void(0)" data-bs-toggle="dropdown">
                                     <i class="icon-base ti tabler-sun icon-22px theme-icon-active text-heading"></i>
                                     <span class="d-none ms-2" id="nav-theme-text">Toggle theme</span>
                                 </a>
@@ -135,7 +135,7 @@
                             <!-- Quick links  -->
                             <li class="nav-item dropdown-shortcuts navbar-dropdown dropdown">
                                 <a class="nav-link dropdown-toggle hide-arrow btn btn-icon btn-text-secondary rounded-pill"
-                                    href="javascript:void(0);" data-bs-toggle="dropdown" data-bs-auto-close="outside"
+                                    href="javascript:void(0)" data-bs-toggle="dropdown" data-bs-auto-close="outside"
                                     aria-expanded="false">
                                     <i class="icon-base ti tabler-layout-grid-add icon-22px text-heading"></i>
                                 </a>
@@ -156,7 +156,7 @@
                                                 <span class="dropdown-shortcuts-icon rounded-circle mb-3">
                                                     <i class="icon-base ti tabler-calendar icon-26px text-heading"></i>
                                                 </span>
-                                                <a href="app-calendar.html" class="stretched-link">Calendar</a>
+                                                <a href="#" class="stretched-link">Calendar</a>
                                                 <small>Appointments</small>
                                             </div>
                                             <div class="dropdown-shortcuts-item col">
@@ -164,7 +164,7 @@
                                                     <i
                                                         class="icon-base ti tabler-file-dollar icon-26px text-heading"></i>
                                                 </span>
-                                                <a href="app-invoice-list.html" class="stretched-link">Invoice App</a>
+                                                <a href="#" class="stretched-link">Invoice App</a>
                                                 <small>Manage Accounts</small>
                                             </div>
                                         </div>
@@ -173,14 +173,14 @@
                                                 <span class="dropdown-shortcuts-icon rounded-circle mb-3">
                                                     <i class="icon-base ti tabler-user icon-26px text-heading"></i>
                                                 </span>
-                                                <a href="app-user-list.html" class="stretched-link">User App</a>
+                                                <a href="#" class="stretched-link">User App</a>
                                                 <small>Manage Users</small>
                                             </div>
                                             <div class="dropdown-shortcuts-item col">
                                                 <span class="dropdown-shortcuts-icon rounded-circle mb-3">
                                                     <i class="icon-base ti tabler-users icon-26px text-heading"></i>
                                                 </span>
-                                                <a href="app-access-roles.html" class="stretched-link">Role
+                                                <a href="#" class="stretched-link">Role
                                                     Management</a>
                                                 <small>Permission</small>
                                             </div>
@@ -188,35 +188,32 @@
                                         <div class="row row-bordered overflow-visible g-0">
                                             <div class="dropdown-shortcuts-item col">
                                                 <span class="dropdown-shortcuts-icon rounded-circle mb-3">
-                                                    <i
-                                                        class="icon-base ti tabler-device-desktop-analytics icon-26px text-heading"></i>
+                                                    <i class="icon-base ti tabler-device-desktop-analytics icon-26px text-heading"></i>
                                                 </span>
-                                                <a href="index.html" class="stretched-link">Dashboard</a>
+                                                <a href="{{ url('dashboard') }}" class="stretched-link">Dashboard</a>
                                                 <small>User Dashboard</small>
                                             </div>
                                             <div class="dropdown-shortcuts-item col">
                                                 <span class="dropdown-shortcuts-icon rounded-circle mb-3">
                                                     <i class="icon-base ti tabler-settings icon-26px text-heading"></i>
                                                 </span>
-                                                <a href="pages-account-settings-account.html"
-                                                    class="stretched-link">Setting</a>
+                                                <a href="{{ url('account-settings') }}" class="stretched-link">Setting</a>
                                                 <small>Account Settings</small>
                                             </div>
                                         </div>
                                         <div class="row row-bordered overflow-visible g-0">
                                             <div class="dropdown-shortcuts-item col">
                                                 <span class="dropdown-shortcuts-icon rounded-circle mb-3">
-                                                    <i
-                                                        class="icon-base ti tabler-help-circle icon-26px text-heading"></i>
+                                                    <i class="icon-base ti tabler-help-circle icon-26px text-heading"></i>
                                                 </span>
-                                                <a href="pages-faq.html" class="stretched-link">FAQs</a>
+                                                <a href="#" class="stretched-link">FAQs</a>
                                                 <small>FAQs & Articles</small>
                                             </div>
                                             <div class="dropdown-shortcuts-item col">
                                                 <span class="dropdown-shortcuts-icon rounded-circle mb-3">
                                                     <i class="icon-base ti tabler-square icon-26px text-heading"></i>
                                                 </span>
-                                                <a href="modal-examples.html" class="stretched-link">Modals</a>
+                                                <a href="#" class="stretched-link">Modals</a>
                                                 <small>Useful Popups</small>
                                             </div>
                                         </div>
@@ -228,7 +225,7 @@
                             <!-- Notification -->
                             <li class="nav-item dropdown-notifications navbar-dropdown dropdown me-3 me-xl-2">
                                 <a class="nav-link dropdown-toggle hide-arrow btn btn-icon btn-text-secondary rounded-pill"
-                                    href="javascript:void(0);" data-bs-toggle="dropdown" data-bs-auto-close="outside"
+                                    href="javascript:void(0)" data-bs-toggle="dropdown" data-bs-auto-close="outside"
                                     aria-expanded="false">
                                     <span class="position-relative">
                                         <i class="icon-base ti tabler-bell icon-22px text-heading"></i>
@@ -484,7 +481,7 @@
                                     </li>
                                     <li class="border-top">
                                         <div class="d-grid p-4">
-                                            <a class="btn btn-primary btn-sm d-flex" href="javascript:void(0);">
+                                            <a class="btn btn-primary btn-sm d-flex" href="javascript:void(0)">
                                                 <small class="align-middle">View all notifications</small>
                                             </a>
                                         </div>
@@ -500,7 +497,7 @@
                             @endphp
                             <!-- User -->
                             <li class="nav-item navbar-dropdown dropdown-user dropdown">
-                                <a class="nav-link dropdown-toggle hide-arrow p-0" href="javascript:void(0);"
+                                <a class="nav-link dropdown-toggle hide-arrow p-0" href="javascript:void(0)"
                                     data-bs-toggle="dropdown">
                                     <div class="avatar avatar-online">
                                         <img src="{{ asset('images/profile/' . auth()->user()->profile_pic) }}"
@@ -510,7 +507,7 @@
                                 </a>
                                 <ul class="dropdown-menu dropdown-menu-end">
                                     <li>
-                                        <a class="dropdown-item mt-0" href="pages-account-settings-account.html">
+                                        <a class="dropdown-item mt-0" href="javascript:void(0)">
                                             <div class="d-flex align-items-center">
                                                 <div class="flex-shrink-0 me-2">
                                                     <div class="avatar avatar-online">
@@ -533,39 +530,22 @@
                                         <div class="dropdown-divider my-1 mx-n2"></div>
                                     </li>
                                     <li>
-                                        <a class="dropdown-item" href="pages-profile-user.html">
+                                        <a class="dropdown-item" href="{{ url('profile') }}">
                                             <i class="icon-base ti tabler-user me-3 icon-md"></i><span
                                                 class="align-middle">My Profile</span>
                                         </a>
                                     </li>
                                     <li>
-                                        <a class="dropdown-item" href="pages-account-settings-account.html">
+                                        <a class="dropdown-item" href="{{ url('account-settings') }}">
                                             <i class="icon-base ti tabler-settings me-3 icon-md"></i><span
                                                 class="align-middle">Settings</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a class="dropdown-item" href="pages-account-settings-billing.html">
-                                            <span class="d-flex align-items-center align-middle">
-                                                <i
-                                                    class="flex-shrink-0 icon-base ti tabler-file-dollar me-3 icon-md"></i><span
-                                                    class="flex-grow-1 align-middle">Billing</span>
-                                                <span
-                                                    class="flex-shrink-0 badge bg-danger d-flex align-items-center justify-content-center">4</span>
-                                            </span>
                                         </a>
                                     </li>
                                     <li>
                                         <div class="dropdown-divider my-1 mx-n2"></div>
                                     </li>
                                     <li>
-                                        <a class="dropdown-item" href="pages-pricing.html">
-                                            <i class="icon-base ti tabler-currency-dollar me-3 icon-md"></i><span
-                                                class="align-middle">Pricing</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a class="dropdown-item" href="pages-faq.html">
+                                        <a class="dropdown-item" href="{{ url('account-faq') }}">
                                             <i class="icon-base ti tabler-question-mark me-3 icon-md"></i><span
                                                 class="align-middle">FAQ</span>
                                         </a>
@@ -635,8 +615,6 @@
                                                 <div data-i18n="Bank Associate">Bank Associate</div>
                                             </a>
                                         </li>
-
-
                                     </ul>
                                 </li>
 
@@ -673,26 +651,63 @@
                                     </ul>
                                 </li>
 
-
-                                <li class="menu-item ">
-                                    <a href="#" class="menu-link">
-                                        <i class="menu-icon icon-base ti tabler-a-b-2"></i>
-                                        <div data-i18n="Leads">Leads</div>
+                                
+                                <li class="menu-item">
+                                    <a href="javascript:void(0)" class="menu-link menu-toggle">
+                                        <i class="menu-icon icon-base ti tabler-book"></i>
+                                        <div data-i18n="CRM">CRM</div>
                                     </a>
+                                    <ul class="menu-sub">
+                                        <li class="menu-item">
+                                            <a href="{{ route('package_list') }}" class="menu-link">
+                                                <i class="menu-icon icon-base ti tabler-package"></i>
+                                                <div data-i18n="Leads">Leads</div>
+                                            </a>
+                                        </li>
+                                        <li class="menu-item">
+                                            <a href="{{ route('business_categories_list') }}" class="menu-link">
+                                                <i class="menu-icon icon-base ti tabler-category"></i>
+                                                <div data-i18n="Opportunity">Opportunity</div>
+                                            </a>
+                                        </li>
+                                        <li class="menu-item">
+                                            <a href="{{ route('course_list') }}" class="menu-link">
+                                                <i class="menu-icon icon-base ti tabler-category"></i>
+                                                <div data-i18n="Courses">Follow-up</div>
+                                            </a>
+                                        </li>
+                                        <li class="menu-item">
+                                            <a href="{{ route('course_list') }}" class="menu-link">
+                                                <i class="menu-icon icon-base ti tabler-category"></i>
+                                                <div data-i18n="Courses">Tasks</div>
+                                            </a>
+                                        </li>
+                                    </ul>
                                 </li>
 
-                                <li class="menu-item ">
-                                    <a href="#" class="menu-link">
+                                
+                                <li class="menu-item">
+                                    <a href="javascript:void(0)" class="menu-link menu-toggle">
                                         <i class="menu-icon icon-base ti tabler-article"></i>
-                                        <div data-i18n="Blogs">Blogs</div>
+                                        <div data-i18n="Manage Blogs">Manage Blogs</div>
                                     </a>
-                                </li>
+                                    <ul class="menu-sub">
 
-                                <li class="menu-item ">
-                                    <a href="#" class="menu-link">
-                                        <i class="menu-icon icon-base ti tabler-device-mobile-message"></i>
-                                        <div data-i18n="Support">Support</div>
-                                    </a>
+                                        <li class="menu-item">
+                                            <a href="{{ route('package_list') }}" class="menu-link">
+                                                <i class="menu-icon icon-base ti tabler-package"></i>
+                                                <div data-i18n="Categories">Categories</div>
+                                            </a>
+                                        </li>
+
+                                        <li class="menu-item">
+                                            <a href="{{ route('business_categories_list') }}" class="menu-link">
+                                                <i class="menu-icon icon-base ti tabler-category"></i>
+                                                <div data-i18n="Blogs">Blogs</div>
+                                            </a>
+                                        </li>
+
+                                    </ul>
                                 </li>
 
 
@@ -710,6 +725,13 @@
                                     </a>
                                 </li>
 
+                                <li class="menu-item ">
+                                    <a href="#" class="menu-link">
+                                        <i class="menu-icon icon-base ti tabler-device-mobile-message"></i>
+                                        <div data-i18n="Support">Support</div>
+                                    </a>
+                                </li>
+
 
                                 <li class="menu-item">
                                     <a href="javascript:void(0)" class="menu-link menu-toggle">
@@ -717,8 +739,6 @@
                                         <div data-i18n="Settings">Settings</div>
                                     </a>
                                     <ul class="menu-sub">
-
-
                                         <li class="menu-item">
                                             <a href="#" class="menu-link">
                                                 <div data-i18n="Front Images ">Front Images </div>
@@ -733,25 +753,31 @@
 
                                         <li class="menu-item">
                                             <a href="#" class="menu-link">
-                                                <div data-i18n="Contact Details">Contact Details</div>
-                                            </a>
-                                        </li>
-
-                                        <li class="menu-item">
-                                            <a href="#" class="menu-link">
                                                 <div data-i18n="Terms & Conditions">Terms & Conditions</div>
                                             </a>
                                         </li>
 
                                         <li class="menu-item">
                                             <a href="#" class="menu-link">
-                                                <div data-i18n="Privacy Policy ">Privacy Policy </div>
+                                                <div data-i18n="Privacy Policy">Privacy Policy</div>
                                             </a>
                                         </li>
 
                                         <li class="menu-item">
                                             <a href="#" class="menu-link">
-                                                <div data-i18n="Refund Policy ">Refund Policy </div>
+                                                <div data-i18n="Refund Policy">Refund Policy</div>
+                                            </a>
+                                        </li>
+                                        
+                                        <li class="menu-item">
+                                            <a href="#" class="menu-link">
+                                                <div data-i18n="Faq's">Faq's</div>
+                                            </a>
+                                        </li>
+
+                                        <li class="menu-item">
+                                            <a href="#" class="menu-link">
+                                                <div data-i18n="Config">Config </div>
                                             </a>
                                         </li>
 
