@@ -108,7 +108,7 @@
     box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.3);
     transition: .5s;
     visibility: hidden;
-    border-top: 2px solid #366B2A;
+    border-top: 2px solid #013477;
     opacity: 0;
 }
 
@@ -131,12 +131,12 @@
     letter-spacing: normal;
     transition: .1s;
     visibility: inherit !important;
-    color: #366B2A !important;
+    color: #013477 !important;
     font-size: 16px;
     font-weight: 500;
 }
 .header-menu ul .sub_menu li:hover>a {
-    background: #366B2A;
+    background: #013477;
     color: #fff !important;
 }
 /* sub menu style two */
@@ -187,7 +187,7 @@ span.bi.bi-sun {
     width: 100%;
     -webkit-box-shadow: 0 2px 5px -2px rgba(0, 0, 0, 0.1);
     box-shadow: 0 2px 5px -2px rgba(0, 0, 0, 0.1);
-    background: #366B2A!important;
+    background: #013477!important;
     transition: .5s;
     z-index: 9;
 }
@@ -1638,7 +1638,7 @@ section.team_area {
     position: relative;
 }
 .single-blog-thumb:before {
-    background: rgba(12,110,109);
+    background: rgb(0 51 119);
     position: absolute;
     height: 0;
     width: 100%;
@@ -1657,7 +1657,7 @@ section.team_area {
 .single-blog-thumb:after {
     position: absolute;
     content: "";
-    background: rgba(12,110,109);
+    background: rgb(0 51 119);
     height: 100%;
     width: 100%;
     left: 0;
@@ -6739,13 +6739,13 @@ h5.team_des {
     color: #fff;
     font-size: 17px;
     font-weight: 400;
-    border-top: 1px solid #0381808c;
+    border-top: 1px solid #385d8e;
     padding-top: 36px;
     margin-top: 44px;
 }
 a.team_join {
     display: inline-block;
-    color: #038180;
+    color: #5788c8;
     font-size: 17px;
     text-decoration: underline;
     margin-top: 6px;
@@ -6939,7 +6939,7 @@ section.blog_area.style_sixs .meta-blog p span {
     margin-left: 10px;
     width: 25px;
     height: 8px;
-    background: #E9EBED !important;
+    background: #9ec1e3 !important;
     border-radius: 20px;
 }
 
@@ -8812,7 +8812,7 @@ button.close-search i {
 }
 
 .loading-screen .animation-preloader .txt-loading {
-    font: bold 5em "", sans-serif;
+    font: bold 4em "", sans-serif;
     text-align: center;
     -webkit-user-select: none;
     -moz-user-select: none;
@@ -8926,23 +8926,23 @@ button.close-search i {
 
 @media screen and (max-width: 767px) {
     .loading-screen .animation-preloader .spinner {
-        height: 8em;
-        width: 8em;
-    }
-
-    .loading-screen .animation-preloader .txt-loading {
-        font: bold 3.5em "Montserrat", sans-serif;
-    }
-}
-
-@media screen and (max-width: 500px) {
-    .loading-screen .animation-preloader .spinner {
         height: 7em;
         width: 7em;
     }
 
     .loading-screen .animation-preloader .txt-loading {
-        font: bold 2em "Montserrat", sans-serif;
+        font: bold 3em "Montserrat", sans-serif;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .loading-screen .animation-preloader .spinner {
+        height: 6em;
+        width: 6em;
+    }
+
+    .loading-screen .animation-preloader .txt-loading {
+        font: bold 1.5em "Montserrat", sans-serif;
     }
 }
 
