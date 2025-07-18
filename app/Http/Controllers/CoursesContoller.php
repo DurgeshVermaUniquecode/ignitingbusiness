@@ -12,9 +12,9 @@ use Yajra\DataTables\Facades\DataTables;
 
 class CoursesContoller extends Controller
 {
+    
     public function packageList(Request $request)
     {
-
 
         if ($request->ajax()) {
             $query = Packages::query();
@@ -416,9 +416,6 @@ class CoursesContoller extends Controller
         if ($request->method() == 'POST') {
 
 
-
-            dd($request->all());
-
             $request->validate([
                 'category' => 'required',
                 'title'    => 'required|string|max:255',
@@ -445,9 +442,6 @@ class CoursesContoller extends Controller
                 'description.string' => 'The description must be a valid string.',
                 'description.max' => 'The description must not exceed 255 characters.',
             ]);
-
-            dd($request->all());
-
 
             $path = $request->path;
 
